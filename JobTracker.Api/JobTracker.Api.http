@@ -1,0 +1,14 @@
+@JobTracker.Api_HostAddress = http://localhost:5104
+
+###
+GET {{JobTracker.Api_HostAddress}}/job/GetJob
+Accept: application/json
+
+###
+@id=3
+GET {{JobTracker.Api_HostAddress}}/job/{{id}}
+Accept: application/json
+
+
+
+
