@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();   // Generates the Swagger document
 
 // DbContext to facilitate connection to Postgres
 builder.Services.AddDbContext<JobDbContext>(options => 
-    options.UseNpgsql(builder.Configuration.GetConnectionString("JobDbContext")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors(options =>
 {
