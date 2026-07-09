@@ -32,9 +32,12 @@ if (app.Environment.IsDevelopment())
 {
     // app.MapOpenApi();
     app.UseHttpsRedirection(); // ONLY redirect to HTTPS when running locally
-    app.UseSwagger();   // Serves the generated JSON document
-    app.UseSwaggerUI(); // Serves the web-based Swagger UI
+    // app.UseSwagger();   // Serves the generated JSON document
+    // app.UseSwaggerUI(); // Serves the web-based Swagger UI
 }
+
+app.UseSwagger();   // Serves the generated JSON document
+app.UseSwaggerUI();
 
 // Uncheck the following line if it fails to run locally
 // app.UseHttpsRedirection();
@@ -45,7 +48,7 @@ app.UseCors(policy => policy.AllowAnyHeader()
                         .SetIsOriginAllowed(origin => true)
                         .AllowCredentials());
 
-// app.UseAuthorization();
+app.UseAuthorization(); // comment out if there are errors running
 
 app.MapControllers();
 
