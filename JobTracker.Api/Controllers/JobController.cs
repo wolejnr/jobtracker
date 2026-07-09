@@ -41,9 +41,23 @@ public class JobController : ControllerBase
     [HttpPost("AddJob")]
     public async Task<ActionResult<Job>> AddJob([FromBody] Job job)
     {
-        _jobDbContext.Jobs.Add(job);
-        await _jobDbContext.SaveChangesAsync();
-        return Ok(job);
+        try
+        {
+            _jobDbContext.Jobs.Add(job);
+            await _jobDbContext.SaveChangesAsync();
+            return Ok(job);
+        }
+        catch(DbUpdateException ex)
+        {
+            // This extracts the hidden Postgres error details and prints them to Render logs
+            var innerMessage = ex.InnerException?.Message ?? ex.Message;
+            Console.WriteLine($"--- DATABASE ERROR DETAILED: {innerMessage} ---");
+            
+            return StatusCode(500, new { error = "Database save failed", details = innerMessage });
+        }
+        // _jobDbContext.Jobs.Add(job);
+        // await _jobDbContext.SaveChangesAsync();
+        // return Ok(job);
     }
     // public IActionResult Create([FromBody] Job job)
     // {

@@ -11,7 +11,7 @@ public class JobDbContext: DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        // Connection string for Postgres
+        // Connection string for Postgres when running locally
         // optionsBuilder.UseNpgsql("Host=localhost;Database=jobdb;Username=postgres;Password=password");
     }
 }
