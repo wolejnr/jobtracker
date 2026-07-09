@@ -22,6 +22,6 @@ COPY --from=publish /app/publish .
 # Render dynamically assigns a port, so bind .NET to all interfaces
 # ENV ASPNETCORE_URLS=http://+:10000
 # EXPOSE 10000
-ENV ASPNETCORE_HTTP_PORTS=${PORT}
+ENV ASPNETCORE_HTTP_PORTS=10000
 
 ENTRYPOINT ["dotnet", "JobTracker.Api.dll"]
