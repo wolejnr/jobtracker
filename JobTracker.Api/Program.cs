@@ -31,11 +31,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     // app.MapOpenApi();
+    app.UseHttpsRedirection(); // ONLY redirect to HTTPS when running locally
     app.UseSwagger();   // Serves the generated JSON document
     app.UseSwaggerUI(); // Serves the web-based Swagger UI
 }
 
-app.UseHttpsRedirection();
+// Uncheck the following line if it fails to run locally
+// app.UseHttpsRedirection();
 
 // app.UseCors("AllowLocalDev");
 app.UseCors(policy => policy.AllowAnyHeader()
