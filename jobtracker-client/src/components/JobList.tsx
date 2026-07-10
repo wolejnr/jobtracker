@@ -1,6 +1,7 @@
 import "../../node_modules/bootstrap/scss/bootstrap.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
+const API = import.meta.env.VITE_API_URL;
 
 interface Job {
     "id": string,
@@ -21,7 +22,7 @@ export default function JobList() {
     const [notes, setNotes] = useState("");
 
     async function Load() {
-        const result = await axios.get("http://localhost:5104/Job/GetJob");
+        const result = await axios.get(`${API}/Job/GetJob`);
         setJobs(result.data);
     }
 
@@ -33,7 +34,7 @@ export default function JobList() {
     // Option 2: Implementing useEffect for Load
     // useEffect(() => {
     //     async function Load() {
-    //         const result = await axios.get("http://localhost:5104/Job/GetJob");
+    //         const result = await axios.get(`${API}/Job/GetJob`);
     //         setJobs(result.data);
     //     }
     //     Load()
@@ -42,14 +43,14 @@ export default function JobList() {
     async function save(event: Event) {
         event.preventDefault();
         try {
-            // await axios.post("http://localhost:5104/Job/AddJob", {
+            // await axios.post(`${API}/Job/AddJob`, {
             //     Company: company,
             //     Role: role,
             //     Location: location,
             //     Status: status,
             //     Notes: notes
             // });
-            await axios.post("http://localhost:5104/Job/AddJob", {
+            await axios.post(`${API}/Job/AddJob`, {
                 company,
                 role,
                 location,
@@ -85,7 +86,7 @@ export default function JobList() {
     }
 
     async function deleteJob(id: string) {
-        await axios.delete(`http://localhost:5104/Job/DeleteJob/${id}`)
+        await axios.delete(`${API}/Job/DeleteJob/${id}`)
         alert("Job was successfully deleted!!")
         setId("");
         setCompany("");
@@ -105,7 +106,7 @@ export default function JobList() {
             return;
         }
         try {
-            await axios.patch(`http://localhost:5104/Job/UpdateJob/${id}`, {
+            await axios.patch(`${API}/Job/UpdateJob/${id}`, {
                 id,
                 company,
                 role,
