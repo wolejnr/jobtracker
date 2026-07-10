@@ -40,7 +40,7 @@ export default function JobList() {
     //     Load()
     // }, [])
 
-    async function save(event: Event) {
+    async function save(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
         try {
             // await axios.post(`${API}/Job/AddJob`, {
@@ -124,9 +124,10 @@ export default function JobList() {
             setNotes("");
             Load();
         }
-        catch(error: any) {
+        catch(error: unknown) {
             console.error(error);
-            alert("catch error: " + error.message || "Unknown error");
+            const message = error instanceof Error ? error.message : "Unknown error";
+            alert("catch error: " + message || "Unknown error");
         }
     }
 
